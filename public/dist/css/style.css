@@ -1,0 +1,119 @@
+/* public/dist/css/style.css */
+
+/* --- CUSTOM MIDNIGHT THEME VARIABLES --- */
+:root {
+    --bg-dark: #111827;       /* Gray 900 (Background Utama) */
+    --bg-surface: #1f2937;    /* Gray 800 (Kartu & Sidebar) */
+    --text-primary: #f3f4f6;  /* Gray 100 */
+    --text-secondary: #9ca3af;/* Gray 400 */
+    --accent-color: #10b981;  /* Emerald 500 */
+    --accent-hover: #059669;  /* Emerald 600 */
+    --border-color: #374151;  /* Gray 700 */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: var(--bg-surface);
+    min-height: 100vh;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar .nav-link {
+    color: var(--text-secondary);
+    padding: 12px 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+    color: var(--accent-color);
+    background-color: rgba(16, 185, 129, 0.1); /* Emerald transparan */
+    border-left: 3px solid var(--accent-color);
+}
+
+.sidebar .nav-link i {
+    width: 25px;
+}
+
+.brand-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+    text-decoration: none;
+}
+
+.brand-logo span {
+    color: var(--accent-color);
+}
+
+/* Main Content Styling */
+.main-content {
+    padding: 20px;
+}
+
+/* Cards Styling */
+.card-midnight {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-primary);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.5rem;
+}
+
+/* Navbar Styling */
+.top-navbar {
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.btn-logout:hover {
+    border-color: #ef4444; /* Red */
+    color: #ef4444;
+}
+
+/* Table Styling */
+.table-dark-custom {
+    --bs-table-bg: var(--bg-surface);
+    --bs-table-color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+.table-dark-custom th {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-color);
+}
+
+/* TAMBAHAN: Agar teks 'text-muted' menjadi terang di background gelap */
+.table-dark-custom .text-muted {
+    color: var(--text-secondary) !important; /* Menggunakan abu-abu terang (#9ca3af) */
+}

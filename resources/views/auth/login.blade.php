@@ -1,4 +1,14 @@
 <x-guest-layout>
+
+    <div class="mb-6 text-center border-b border-gray-700 pb-4">
+        <h2 class="text-xl font-bold text-white tracking-wide">
+            Login Karyawan/Customer
+        </h2>
+        <p class="text-sm text-gray-400 mt-1">
+            Silakan masuk untuk melanjutkan transaksi
+        </p>
+    </div>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -34,7 +44,7 @@
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                <a class="underline text-sm text-gray-400 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
@@ -42,6 +52,15 @@
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
+
+        </div>
+        <div class="mt-8 pt-6 border-t border-gray-700 text-center">
+            <p class="text-sm text-gray-400">
+                Belum punya akun? 
+                <a href="{{ route('register') }}" class="font-bold text-emerald-400 hover:text-emerald-300 transition duration-150 ease-in-out">
+                    Daftar Sekarang
+                </a>
+            </p>
         </div>
     </form>
 </x-guest-layout>

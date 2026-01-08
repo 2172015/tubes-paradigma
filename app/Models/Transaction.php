@@ -9,7 +9,9 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    // protected $guarded = ['id'];
+    // HAPUS baris di bawah ini agar created_at & updated_at otomatis terisi
+    // const CREATED_AT = 'created_at';
+    // const UPDATED_AT = null;
 
     protected $fillable = [
         'user_id',
@@ -20,6 +22,13 @@ class Transaction extends Model
         'invoice_code'
     ];
 
+    // TAMBAHAN: Casts agar tipe data lebih presisi saat ditarik dari DB
+    protected $casts = [
+        'total_amount' => 'decimal:2', // Agar dianggap angka desimal, bukan string
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
     }
@@ -28,7 +37,7 @@ class Transaction extends Model
         return $this->belongsTo(Promo::class);
     }
 
-    public function transactionDetail() {
+    public function transactionDetails() {
         return $this->hasMany(TransactionDetail::class);
     }
 }

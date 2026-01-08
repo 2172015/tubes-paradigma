@@ -15,13 +15,13 @@
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-gray-900 via-emerald-950 to-gray-900">
             
-            <div class="mb-6 text-center">
-                <a href="/">
-                    <h1 class="text-4xl font-extrabold text-white tracking-wider drop-shadow-lg">
-                        ONLINE <span class="text-emerald-500">P.O.S</span>
-                    </h1>
-                    <p class="text-gray-400 text-sm mt-2">Financial & Stock Management</p>
+            <div class="mb-8 text-center">
+                <a href="/" class="d-flex justify-content-center">
+                    <img src="{{ asset('dist/img/logo-pixelate.png') }}" alt="PIXELATE Logo" style="width: 150px; height: auto; margin: auto;" class="drop-shadow-2xl rounded-3xl">
                 </a>
+                <p class="text-emerald-200/70 text-sm mt-4 tracking-widest uppercase font-semibold">
+                    AI-Powered Design Assets
+                </p>
             </div>
 
             <div class="w-full sm:max-w-2xl mt-6 px-6 py-8 bg-gray-800 shadow-2xl overflow-hidden sm:rounded-2xl border border-gray-700">

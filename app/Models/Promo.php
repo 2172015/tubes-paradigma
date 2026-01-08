@@ -11,8 +11,6 @@ class Promo extends Model
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = null;
-
-    // protected $guarded = ['id'];
     
     protected $fillable = [
         'code',

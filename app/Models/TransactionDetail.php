@@ -11,8 +11,6 @@ class TransactionDetail extends Model
 
     public $timestamps = false;
 
-    // protected $guarded = ['id'];
-
     protected $fillable = [
         'transaction_id',
         'product_id',

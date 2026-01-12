@@ -1,3 +1,5 @@
+@use('App\Enums\TransactionStatus') {{-- Import Enum --}}
+
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
@@ -5,6 +7,7 @@
 
 @section('content')
     <div class="row g-4 mb-4">
+        {{-- Card Statistik (Total Penjualan, Transaksi, Low Stock) --}}
         <div class="col-md-4">
             <div class="card card-midnight p-3 border-0 shadow-sm h-100">
                 <div class="d-flex justify-content-between align-items-center">
@@ -48,6 +51,7 @@
         </div>
     </div>
 
+    {{-- Tabel Transaksi --}}
     <div class="card card-midnight">
         <div class="card-header bg-transparent border-bottom border-secondary d-flex justify-content-between align-items-center py-3">
             <h5 class="mb-0 text-white">Transaksi Terakhir</h5>
@@ -79,17 +83,13 @@
                                 </div>
                             </td>
                             <td class="text-secondary small">{{ $trx->created_at->format('d M, H:i') }}</td>
+                            
                             <td>
-                                @if($trx->status == 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                @elseif($trx->status == 'shipping')
-                                    <span class="badge bg-primary">Dikirim</span>
-                                @elseif($trx->status == 'completed')
-                                    <span class="badge bg-success">Selesai</span>
-                                @else
-                                    <span class="badge bg-secondary">{{ $trx->status }}</span>
-                                @endif
+                                <span class="badge bg-{{ $trx->status->color() }} {{ $trx->status === TransactionStatus::PENDING ? 'text-dark' : '' }}">
+                                    {{ $trx->status->label() }}
+                                </span>
                             </td>
+
                             <td class="text-success fw-bold">Rp {{ number_format($trx->total_amount, 0, ',', '.') }}</td>
                             <td class="text-end pe-4">
                                 <a href="{{ route('admin.transactions') }}" class="btn btn-sm btn-outline-secondary">

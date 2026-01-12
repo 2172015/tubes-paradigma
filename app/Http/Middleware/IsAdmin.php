@@ -2,17 +2,17 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserRole;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth; // <--- WAJIB DITAMBAHKAN
+use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // Gunakan Auth::check() dan Auth::user()
-        if (Auth::check() && Auth::user()->role === 'admin') {
+        if (Auth::check() && Auth::user()->role === UserRole::ADMIN) {
             return $next($request);
         }
 

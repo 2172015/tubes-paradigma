@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -29,34 +40,20 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        // Validasi input
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price'       => 'required|numeric|min:0',
-            'stock'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
-        ]);
+        // Ambil data yang sudah tervalidasi saja (Keamanan)
+        $data = $request->validated();
 
-        // Proses Upload Gambar
-        $imagePath = null;
+        // Handle Image via Service
         if ($request->hasFile('image')) {
-            // Upload ke folder 'public/products'
-            $imagePath = $request->file('image')->store('products', 'public');
+            $data['image'] = $this->imageService->upload($request->file('image'));
         }
 
-        // Simpan ke Database
-        Product::create([
-            'name'        => $request->name,
-            'description' => $request->description,
-            'price'       => $request->price,
-            'stock'       => $request->stock,
-            'image'       => $imagePath,
-        ]);
+        Product::create($data);
 
-        return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('products.index')
+            ->with('success', 'Produk berhasil ditambahkan!');
     }
 
     /**
@@ -79,56 +76,37 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price'       => 'required|numeric|min:0',
-            'stock'       => 'required|integer|min:0',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        $data = $request->validated();
 
-        $product = Product::findOrFail($id);
-
-        // Siapkan data update
-        $data = [
-            'name'        => $request->name,
-            'description' => $request->description,
-            'price'       => $request->price,
-            'stock'       => $request->stock,
-        ];
-
-        // Cek jika ada upload gambar baru
+        // Handle Image via Service
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($product->image) {
-                Storage::disk('public')->delete($product->image);
-            }
-            // Upload gambar baru
-            $data['image'] = $request->file('image')->store('products', 'public');
+            // 1. Hapus gambar lama pakai service
+            $this->imageService->delete($product->image);
+            
+            // 2. Upload gambar baru pakai service
+            $data['image'] = $this->imageService->upload($request->file('image'));
         }
 
         $product->update($data);
 
-        return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('products.index')
+            ->with('success', 'Produk berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product): RedirectResponse
     {
-        $product = Product::findOrFail($id);
-
-        // Hapus file gambar dari penyimpanan agar hemat storage
-        if ($product->image) {
-            Storage::disk('public')->delete($product->image);
-        }
-
-        // Hapus data dari database
+        // Hapus gambar via service
+        $this->imageService->delete($product->image);
+        
+        // Hapus data DB
         $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus!');
+        return redirect()->route('products.index')
+            ->with('success', 'Produk berhasil dihapus!');
     }
 }

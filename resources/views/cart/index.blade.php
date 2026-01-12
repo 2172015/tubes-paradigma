@@ -153,9 +153,23 @@
                         @endif
 
                         @if(session('cart'))
-                            <form action="{{ route('checkout') }}" method="POST">
+                            {{-- TAMBAHKAN enctype="multipart/form-data" AGAR BISA UPLOAD FILE --}}
+                            <form action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <button type="submit" class="btn btn-success w-100 fw-bold py-2 shadow-sm" onclick="return confirm('Bayar sebesar Rp {{ number_format($grandTotal, 0, ',', '.') }} sekarang?')">
+                                
+                                {{-- INPUT BUKTI BAYAR --}}
+                                <div class="mb-3">
+                                    <label for="payment_proof" class="form-label text-white small">Upload Bukti Pembayaran</label>
+                                    <input class="form-control form-control-sm bg-dark text-white border-secondary" 
+                                        type="file" 
+                                        id="payment_proof" 
+                                        name="payment_proof" 
+                                        accept="image/*" 
+                                        required>
+                                    <div class="form-text text-secondary small">Format: JPG, PNG. Max: 2MB.</div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success w-100 fw-bold py-2 shadow-sm" onclick="return confirm('Pastikan bukti pembayaran sudah benar. Lanjutkan?')">
                                     <i class="fas fa-credit-card me-2"></i> BAYAR SEKARANG
                                 </button>
                             </form>

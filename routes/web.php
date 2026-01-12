@@ -1,26 +1,21 @@
 <?php
 
+use App\Enums\UserRole;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 // 1. HALAMAN UTAMA (Landing Page / Katalog)
 Route::get('/', function () {
-    // Logic: Jika yang login adalah ADMIN, jangan kasih liat halaman depan,
-    // langsung lempar ke dashboard admin.
-    if (Auth::check() && Auth::user()->role === 'admin') {
+    // Logic: Jika yang login adalah ADMIN, langsung lempar ke dashboard admin.
+    if (Auth::check() && Auth::user()->role === UserRole::ADMIN) {
         return redirect()->route('dashboard');
     }
 
@@ -43,16 +38,17 @@ Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     // Product
     Route::resource('products', ProductController::class);
 
-    //Transaction
+    // Transaction
     Route::get('/admin/transactions', [AdminController::class, 'transactions'])->name('admin.transactions');
     Route::patch('/admin/transaction/{id}/ship', [App\Http\Controllers\TransactionController::class, 'markAsShipped'])->name('admin.transaction.ship');
     Route::patch('/transactions/{transaction}/cancel', [TransactionController::class, 'cancel'])
     ->name('admin.transaction.cancel');
 
-    //Promo
+    // Promo
     Route::resource('promos', PromoController::class);
     
-    // NANTI: Route Laporan ditaruh disini
+    // Reports
+    Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 });
 
 

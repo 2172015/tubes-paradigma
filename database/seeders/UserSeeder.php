@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Enums\UserRole;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -16,11 +17,11 @@ class UserSeeder extends Seeder
     {
         // 1. Akun ADMIN (Owner)
         User::updateOrCreate(
-            ['email' => 'admin@admin.com'], // Cek email ini dulu
+            ['email' => 'admin@admin.com'],
             [
                 'name' => 'Owner Toko',
-                'password' => Hash::make('password'), // Password default: 'password'
-                'role' => 'admin',
+                'password' => Hash::make('password'),
+                'role' => UserRole::ADMIN, // <--- Ganti string 'admin' jadi Enum
                 'phone_number' => '081234567890',
                 'address' => 'Kantor Pusat Online POS, Jakarta',
             ]
@@ -32,7 +33,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Budi Pelanggan',
                 'password' => Hash::make('password'),
-                'role' => 'customer',
+                'role' => UserRole::CUSTOMER, // <--- Ganti string 'customer' jadi Enum
                 'phone_number' => '089876543210',
                 'address' => 'Jl. Mawar No. 10, Bandung',
             ]

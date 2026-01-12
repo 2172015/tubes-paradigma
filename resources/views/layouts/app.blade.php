@@ -1,3 +1,6 @@
+@use('App\Enums\UserRole')
+@use('App\Enums\TransactionStatus')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +18,7 @@
 <div class="container-fluid">
     <div class="row">
         
+        {{-- SIDEBAR --}}
         <div class="col-md-3 col-lg-2 d-none d-md-block sidebar px-0">
             <a href="{{ route('dashboard') }}" class="brand-logo d-flex align-items-center gap-3 text-decoration-none py-3">
                 <img src="{{ asset('dist/img/logo-pixelate.png') }}" alt="PIXELATE Logo" width="40" height="40" class="rounded-2">
@@ -36,7 +40,12 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.transactions') ? 'active' : '' }}" href="{{ route('admin.transactions') }}">
                         <i class="fas fa-file-invoice-dollar"></i> Transaksi Masuk
-                        @php $pendingCount = \App\Models\Transaction::where('status', 'pending')->count(); @endphp
+                        
+                        {{-- Badge Notifikasi Pending (Pakai Enum) --}}
+                        @php 
+                            $pendingCount = \App\Models\Transaction::where('status', TransactionStatus::PENDING)->count(); 
+                        @endphp
+                        
                         @if($pendingCount > 0)
                             <span class="badge bg-warning text-dark ms-2">{{ $pendingCount }}</span>
                         @endif
@@ -49,13 +58,15 @@
                     </a>
                 </li>
                 
+                {{-- UPDATE: Menu Laporan sudah di-link ke Route --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ request()->routeIs('admin.reports') ? 'active' : '' }}" href="{{ route('admin.reports') }}">
                         <i class="fas fa-chart-line"></i> Laporan
                     </a>
                 </li>
 
-                @if(Auth::user()->role === 'admin')
+                {{-- Admin Only Menu --}}
+                @if(Auth::user()->isAdmin())
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.users') ? 'active' : '' }}" href="{{ route('admin.users') }}">
                         <i class="fas fa-users"></i> User Management
@@ -65,6 +76,7 @@
             </ul>
         </div>
 
+        {{-- MAIN CONTENT --}}
         <main class="col-md-9 col-lg-10 ms-sm-auto px-md-4 main-content">
             
             <div class="d-flex justify-content-between align-items-center top-navbar">
@@ -76,7 +88,8 @@
                 <div class="d-flex align-items-center">
                     <div class="me-3 text-end d-none d-sm-block">
                         <span class="d-block text-white">{{ Auth::user()->email }}</span>
-                        <span class="badge bg-success">{{ ucfirst(Auth::user()->role) }}</span>
+                        {{-- Badge Role (Pakai Enum Label) --}}
+                        <span class="badge bg-success">{{ Auth::user()->role->label() }}</span>
                     </div>
                     
                     <form method="POST" action="{{ route('logout') }}">

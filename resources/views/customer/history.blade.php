@@ -10,6 +10,9 @@
 </head>
 <body>
 
+    {{-- Import Enum --}}
+    @use('App\Enums\TransactionStatus')
+
     <nav class="navbar navbar-dark bg-dark border-bottom border-secondary mb-4">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ route('home') }}">
@@ -42,11 +45,18 @@
                             <span class="mx-2 text-secondary">|</span>
                             <span class="text-secondary small">{{ $trx->created_at->format('d M Y, H:i') }}</span>
                         </div>
+                        
                         <div class="d-flex align-items-center gap-2">
-                            @if($trx->status == 'pending')
-                                <span class="badge bg-warning text-dark">Menunggu Konfirmasi</span>
-                            @elseif($trx->status == 'shipping')
-                                <span class="badge bg-primary">Sedang Dikirim</span>
+                            
+                            {{-- 1. Badge Status Otomatis --}}
+                            {{-- Mengambil warna dan label langsung dari logic Enum --}}
+                            <span class="badge bg-{{ $trx->status->color() }}">
+                                {{ $trx->status->label() }}
+                            </span>
+
+                            {{-- 2. Tombol Konfirmasi (Hanya muncul jika status SHIPPING) --}}
+                            {{-- Kita bandingkan object status dengan Case Enum --}}
+                            @if($trx->status === TransactionStatus::SHIPPING)
                                 <form action="{{ route('transaction.complete', $trx->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('PATCH')
@@ -54,11 +64,8 @@
                                         <i class="fas fa-check"></i> Pesanan Diterima
                                     </button>
                                 </form>
-                            @elseif($trx->status == 'completed')
-                                <span class="badge bg-success">Selesai</span>
-                            @else
-                                <span class="badge bg-secondary">{{ ucfirst($trx->status) }}</span>
                             @endif
+
                         </div>
                     </div>
                     <div class="card-body">

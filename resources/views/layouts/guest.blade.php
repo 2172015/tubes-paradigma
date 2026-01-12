@@ -28,9 +28,9 @@
                 {{ $slot }}
             </div>
             
-            {{-- <div class="mt-8 text-gray-500 text-xs">
+            <div class="mt-8 text-gray-500 text-xs">
                 &copy; {{ date('Y') }} Online POS Project.
-            </div> --}}
+            </div>
         </div>
     </body>
 </html>

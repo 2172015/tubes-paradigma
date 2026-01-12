@@ -18,7 +18,8 @@ return new class extends Migration
             $table->decimal('price', 14, 2)->nullable();
             $table->integer('stock')->nullable();
             $table->string('image')->nullable();
-            $table->timestamps(); // created_at & updated_at
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

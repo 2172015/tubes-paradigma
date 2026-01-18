@@ -238,7 +238,6 @@
 
                             {{-- Kolom Aksi --}}
                             <td class="text-end pe-4">
-                                {{-- REFACTOR: Menggunakan Enum Comparison --}}
                                 @if($trx->status === TransactionStatus::PENDING)
                                     <div class="d-flex justify-content-end gap-1">
                                         <form action="{{ route('admin.transaction.ship', $trx->id) }}" method="POST">

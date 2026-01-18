@@ -191,12 +191,6 @@ class TransactionController extends Controller
         $transaction->update([
             'status' => TransactionStatus::CANCELED
         ]);
-
-        // OPSI TAMBAHAN (Jika Anda ingin mengembalikan stok produk):
-        // foreach ($transaction->transactionDetails as $detail) {
-        //     $detail->product->increment('stock', $detail->quantity);
-        // }
-
         return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
     }
 }

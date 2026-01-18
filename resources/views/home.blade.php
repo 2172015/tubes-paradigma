@@ -119,8 +119,7 @@
         <div class="row g-4">
             @forelse($products as $product)
                 <div class="col-md-3 col-6">
-                    {{-- Memanggil Component (Instansiasi Objek UI) --}}
-                    {{-- Atribut :product="..." adalah cara kita passing data ke __construct --}}
+                    {{-- Memanggil product card dari component --}}
                     <x-product-card :product="$product" />
                 </div>
             @empty

@@ -107,3 +107,32 @@ File gambar dapat diunduh pada link berikut:
 
 Source code project:
 https://github.com/2172015/tubes-paradigma
+
+## Konsep OOP & Arsitektur Aplikasi
+
+Proyek ini dibangun dengan menerapkan prinsip **Object-Oriented Programming (OOP)** untuk menjaga kode tetap bersih, mudah dibaca, dan mudah dikembangkan. Berikut adalah implementasinya:
+
+### 1. Model-View-Controller (MVC)
+Arsitektur utama memisahkan logika aplikasi menjadi tiga komponen:
+- **Model:** Mengelola data dan logika database (`app/Models`).
+- **View:** Menangani tampilan antarmuka pengguna (`resources/views`).
+- **Controller:** Menghubungkan Model dan View (`app/Http/Controllers`).
+- **Entry Point:** Semua request diatur melalui `routes/web.php`.
+
+### 2. PHP Enums (Type Safety)
+- **Lokasi:** `app/Enums/`
+- **Implementasi:** `UserRole` untuk hak akses dan `TransactionStatus` untuk status pesanan.
+
+### 3. Encapsulation & Helper Methods
+Membungkus logika pengecekan di dalam Model untuk menyembunyikan kompleksitas dari Controller/View.
+- **Contoh:** Method `isAdmin()` dan `isCustomer()` pada Model `User`.
+- **Penggunaan:** Kita cukup memanggil `Auth::user()->isAdmin()` daripada menulis logika `Auth::user()->role === 'admin'` berulang kali.
+
+### 4. Form Requests
+Logika validasi input dipisahkan dari Controller ke kelas khusus (*Request Class*).
+- **Lokasi:** `app/Http/Requests/`
+- **Implementasi:** `StoreProductRequest` dan `UpdateProductRequest`.
+
+### 5. Soft Deletes
+Menggunakan *Trait* bawaan Laravel untuk menangani penghapusan data secara aman. Produk yang dihapus tidak hilang permanen dari database (hanya disembunyikan), sehingga riwayat transaksi lama tetap aman.
+- **Implementasi:** Trait `SoftDeletes` pada Model `Product`.

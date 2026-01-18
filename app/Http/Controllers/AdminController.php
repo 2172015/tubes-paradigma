@@ -51,8 +51,6 @@ class AdminController extends Controller
         }
 
         $users = $query->latest()->paginate(10);
-
-        // REFACTOR: Gunakan Enum UserRole
         $totalUsers = User::count();
         $totalAdmins = User::where('role', UserRole::ADMIN)->count();       // Bukan 'admin'
         $totalCustomers = User::where('role', UserRole::CUSTOMER)->count(); // Bukan 'customer'
@@ -64,8 +62,6 @@ class AdminController extends Controller
     public function transactions()
     {
         $transactions = Transaction::with('user')->latest()->get();
-        
-        // REFACTOR: Gunakan Enum TransactionStatus
         $totalRevenue = Transaction::whereIn('status', [
             TransactionStatus::SHIPPING, 
             TransactionStatus::COMPLETED

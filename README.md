@@ -2,6 +2,11 @@
 
 Pixelate adalah sistem Point of Sale (POS) dan E-Commerce berbasis web yang dibangun menggunakan Framework Laravel. Aplikasi ini memungkinkan pelanggan untuk memesan produk secara online dan admin untuk mengelola produk, transaksi, serta melihat laporan penjualan.
 
+## Anggota Kelompok:
+### 1. Michael Marenden 1972043 (Ketua)
+### 2. Daniel Yudhistira Putra P. 1972056 
+### 3. Dave Andrew 2172015
+
 ## Fitur Utama
 
 - **Autentikasi & Otorisasi:** Login Multi-user (Admin & Customer) menggunakan Enums.

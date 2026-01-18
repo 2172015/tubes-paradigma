@@ -133,6 +133,9 @@ Logika validasi input dipisahkan dari Controller ke kelas khusus (*Request Class
 - **Lokasi:** `app/Http/Requests/`
 - **Implementasi:** `StoreProductRequest` dan `UpdateProductRequest`.
 
-### 5. Soft Deletes
+### 5. Reusable Object
+Menggunakan component yang disediakan `tailwind.css` untuk membuat product card, sehingga pembuatan product card tidak manual melalui html, namun menggunakan **component**.
+
+### 6. Soft Deletes
 Menggunakan *Trait* bawaan Laravel untuk menangani penghapusan data secara aman. Produk yang dihapus tidak hilang permanen dari database (hanya disembunyikan), sehingga riwayat transaksi lama tetap aman.
 - **Implementasi:** Trait `SoftDeletes` pada Model `Product`.

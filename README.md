@@ -29,7 +29,7 @@ Ekstrak file `.zip` proyek ke folder yang anda inginkan.
 Ikuti urutan langkah di bawah ini secara teliti agar aplikasi berjalan dengan lancar.
 
 ### 1. Install Composer
-Jika komputer Anda belum memiliki **Composer**, silakan download dan install terlebih dahulu melalui link resmi: https://getcomposer.org/download/
+Jika komputer Anda belum memiliki **Composer**, silakan download dan install terlebih dahulu melalui link resmi: [text](https://getcomposer.org/download/)
 
 
 ### 2. Install Backend Dependencies
@@ -101,6 +101,9 @@ Silahkan gunakan akun diatas ini untuk menjalankan demo, atau bisa registrasi un
 
 ### 11. Referensi
 File gambar dapat diunduh pada link berikut:
-1. https://static.vecteezy.com/system/resources/thumbnails/001/849/553/small/modern-gold-background-free-vector.jpg
-2. https://freedesignfile.com/111607-modern-business-logos-design-art-vector-01/#google_vignette
-3. https://www.shutterstock.com/image-vector/simple-owl-logo-vector-01-2715790511?irclickid=wTP3z9XZfxycUJ%3AwPLXbIwu0UkpXnUXNe0HESY0&irgwc=1&afsrc=1&pl=46057-560528&utm_medium=Affiliate&utm_campaign=Khayriddin%20Sodiqov&utm_source=46057&utm_term=&utm_content=560528
+1. ![alt text](https://static.vecteezy.com/system/resources/thumbnails/001/849/553/small/modern-gold-background-free-vector.jpg)
+2. [text](https://freedesignfile.com/111607-modern-business-logos-design-art-vector-01/#google_vignette)
+3. [text](https://www.shutterstock.com/image-vector/simple-owl-logo-vector-01-2715790511?irclickid=wTP3z9XZfxycUJ%3AwPLXbIwu0UkpXnUXNe0HESY0&irgwc=1&afsrc=1&pl=46057-560528&utm_medium=Affiliate&utm_campaign=Khayriddin%20Sodiqov&utm_source=46057&utm_term=&utm_content=560528)
+
+Source code project:
+[text](https://github.com/2172015/tubes-paradigma)

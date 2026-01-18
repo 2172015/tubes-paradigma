@@ -99,15 +99,6 @@ Aplikasi sekarang dapat diakses di browser melalui alamat: `http://127.0.0.1:800
 
 Silahkan gunakan akun diatas ini untuk menjalankan demo, atau bisa registrasi untuk membuat akun customer sendiri. Untuk mencegah penyebaran informasi, disarankan untuk tidak menggunakan email dan password pribadi.
 
-### 11. Referensi
-File gambar dapat diunduh pada link berikut:
-1. https://static.vecteezy.com/system/resources/thumbnails/001/849/553/small/modern-gold-background-free-vector.jpg
-2. https://freedesignfile.com/111607-modern-business-logos-design-art-vector-01/#google_vignette
-3. https://www.shutterstock.com/image-vector/simple-owl-logo-vector-01-2715790511?irclickid=wTP3z9XZfxycUJ%3AwPLXbIwu0UkpXnUXNe0HESY0&irgwc=1&afsrc=1&pl=46057-560528&utm_medium=Affiliate&utm_campaign=Khayriddin%20Sodiqov&utm_source=46057&utm_term=&utm_content=560528
-
-Source code project:
-https://github.com/2172015/tubes-paradigma
-
 ## Konsep OOP & Arsitektur Aplikasi
 
 Proyek ini dibangun dengan menerapkan prinsip **Object-Oriented Programming (OOP)** untuk menjaga kode tetap bersih, mudah dibaca, dan mudah dikembangkan. Berikut adalah implementasinya:
@@ -119,7 +110,7 @@ Arsitektur utama memisahkan logika aplikasi menjadi tiga komponen:
 - **Controller:** Menghubungkan Model dan View (`app/Http/Controllers`).
 - **Entry Point:** Semua request diatur melalui `routes/web.php`.
 
-### 2. PHP Enums (Type Safety)
+### 2. PHP Enums
 - **Lokasi:** `app/Enums/`
 - **Implementasi:** `UserRole` untuk hak akses dan `TransactionStatus` untuk status pesanan.
 
@@ -134,8 +125,17 @@ Logika validasi input dipisahkan dari Controller ke kelas khusus (*Request Class
 - **Implementasi:** `StoreProductRequest` dan `UpdateProductRequest`.
 
 ### 5. Reusable Object
-Menggunakan component yang disediakan `tailwind.css` untuk membuat product card, sehingga pembuatan product card tidak manual melalui html, namun menggunakan **component**.
+Menggunakan component yang disediakan `Blade Component` untuk membuat **`product card`**, sehingga pembuatan product card tidak manual melalui html, namun menggunakan **component**.
 
 ### 6. Soft Deletes
 Menggunakan *Trait* bawaan Laravel untuk menangani penghapusan data secara aman. Produk yang dihapus tidak hilang permanen dari database (hanya disembunyikan), sehingga riwayat transaksi lama tetap aman.
 - **Implementasi:** Trait `SoftDeletes` pada Model `Product`.
+
+## Referensi
+**Source code project:** https://github.com/2172015/tubes-paradigma
+
+**Aset gambar:** 
+1. https://static.vecteezy.com/system/resources/thumbnails/001/849/553/small/modern-gold-background-free-vector.jpg
+2. https://freedesignfile.com/111607-modern-business-logos-design-art-vector-01/#google_vignette
+3. https://www.shutterstock.com/image-vector/simple-owl-logo-vector-01-2715790511?irclickid=wTP3z9XZfxycUJ%3AwPLXbIwu0UkpXnUXNe0HESY0&irgwc=1&afsrc=1&pl=46057-560528&utm_medium=Affiliate&utm_campaign=Khayriddin%20Sodiqov&utm_source=46057&utm_term=&utm_content=560528
+
